@@ -1,0 +1,18 @@
+# Use a imagem oficial do SQL Server 2022
+FROM mcr.microsoft.com/mssql/server:2022-latest
+
+# Definir variáveis de ambiente
+ENV ACCEPT_EULA=Y
+ENV SA_PASSWORD=SenhaForte123!
+
+# Criar diretório para scripts SQL
+RUN mkdir -p /sql
+
+# Copiar scripts SQL do projeto para o container
+COPY ./sql /sql
+
+# Expor porta padrão
+EXPOSE 1433
+
+# Comando padrão para rodar o SQL Server
+CMD ["/opt/mssql/bin/sqlservr"]
